@@ -42,7 +42,9 @@ public class MainWindow extends JFrame {
 	this.timerRunning = false;
 	this.prefs = Preferences.userNodeForPackage(xyz.koleno.GridDiffusion.Application.class);	
 	this.init();
-	this.setVisible(true);
+
+        this.setLocationRelativeTo(null); // center the window        
+        this.setVisible(true);
     }
     
     private void init() {

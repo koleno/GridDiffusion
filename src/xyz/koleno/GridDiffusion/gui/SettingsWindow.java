@@ -40,7 +40,8 @@ public class SettingsWindow extends JFrame {
 
 	this.prefs = Preferences.userNodeForPackage(xyz.koleno.GridDiffusion.Application.class);	
 	this.loadPrefs();
-	
+
+        this.setLocationRelativeTo(null); // center the window                
 	this.setVisible(true);
     }
     

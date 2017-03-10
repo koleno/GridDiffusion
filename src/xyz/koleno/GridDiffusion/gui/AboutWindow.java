@@ -24,7 +24,8 @@ public class AboutWindow extends JFrame {
 	this.setDefaultCloseOperation(HIDE_ON_CLOSE);	
 	this.setSize(260, 310);
 	this.init();
-	
+
+        this.setLocationRelativeTo(null); // center the window                
 	this.setVisible(true);
     }
     
