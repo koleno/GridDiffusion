@@ -132,7 +132,7 @@ public class MainWindow extends JFrame {
 	    beh.setPayoff(i, Double.parseDouble(optBeh[i].getText()));
 	}
 	
-	this.grid.getNetwork().startDiffusionNew();
+	this.grid.getNetwork().startDiffusion();
 	this.grid.repaint();
     }
     
@@ -151,7 +151,7 @@ public class MainWindow extends JFrame {
 	    this.timer.schedule(new TimerTask() {
 		@Override
 		public void run() {
-		    grid.getNetwork().startDiffusionNew();
+		    grid.getNetwork().startDiffusion();
 		    grid.repaint();
 		}
 	    }, prefs.getInt("updateInterval", 2)*1000, prefs.getInt("updateInterval", 2)*1000);

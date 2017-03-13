@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
- *
+ * Settings
  * @author Dusan Koleno
  */
 public class SettingsWindow extends JFrame {

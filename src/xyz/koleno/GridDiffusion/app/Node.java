@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 /**
- * Node (vertex)
+ * One node in a grid
  * 
  * @author Dusan Koleno
  */
