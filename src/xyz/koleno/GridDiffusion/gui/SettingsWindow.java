@@ -70,8 +70,8 @@ public class SettingsWindow extends JFrame {
 	
 	panel.add(new JLabel("Columns (max. 100)"));
 	cols = new JTextField();
-	panel.add(cols);	
-	
+	panel.add(cols);
+        	
 	panel.add(new JLabel(" "));
 	JButton saveButton = new JButton("Save");
 	saveButton.addActionListener(new ActionListener() {

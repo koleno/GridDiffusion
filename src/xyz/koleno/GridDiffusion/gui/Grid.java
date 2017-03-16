@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * Grid rendering class
@@ -36,7 +37,7 @@ public class Grid extends JPanel {
 	this.rectHeight = this.rectWidth = 10;
 	this.marginLeft = this.marginTop = 0;
 		
-	this.setBackground(Color.white);
+	this.setBackground(Color.WHITE);
 	this.network = new Network();
 	this.mouseListener = null;
     }
@@ -49,13 +50,8 @@ public class Grid extends JPanel {
     }
     
     private void drawGrid(Graphics g) {
-	int height = this.getSize().height;
-	int width = this.getSize().width;
-	this.rectWidth = (width - 10) / cols;
-	this.rectHeight = (height - 10) / rows;		
-	this.marginLeft = (width - (cols*rectWidth)) / 2;
-	this.marginTop =  (height - (rows*rectHeight)) / 2;
-	
+        this.calculateDimensions();    
+        
 	if(this.network.getSize() != (cols + 1) * (rows + 1)) {
 	    this.initNetwork();
 	}
@@ -180,6 +176,26 @@ public class Grid extends JPanel {
     
     public void setCols(int cols) {
 	this.cols = cols;
+    }
+
+    private void calculateDimensions() {
+	int height = this.getSize().height;
+	int width = this.getSize().width;
+	this.rectWidth = width / cols;
+	this.rectHeight = height / rows;	
+        
+        // add margins if the grid is too close to edges of its container
+        // this is done by adding more cols/rows that won't be rendered
+        if(rectWidth*cols > (rectWidth - 10)) {
+            this.rectWidth = width / (cols + 1); 
+        }
+        
+        if(rectHeight*rows > (rectWidth - 10)) {
+            this.rectHeight = height / (rows + 1);	
+        }
+        
+	this.marginLeft = (width - (cols*rectWidth)) / 2;
+	this.marginTop =  (height - (rows*rectHeight)) / 2;    
     }
         
 }

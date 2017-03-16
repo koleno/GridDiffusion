@@ -40,7 +40,7 @@ public class AboutWindow extends JFrame {
         about.append("Released under<br>GNU GPLv2<br><br>");
         
         
-	about.append("Developed in Spring 2014 for independent study course <br> Models and Algorithms for Social Media <br><br>");
+	about.append("Originally developed in Spring 2014 for independent study course <br> Models and Algorithms for Social Media <br><br>");
 	about.append("Instructor <br> Prof. Evgeny Dantsin<br>");
 	about.append("Roosevelt University");
 	about.append("</center></html>");

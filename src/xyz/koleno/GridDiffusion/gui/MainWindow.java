@@ -1,13 +1,17 @@
 package xyz.koleno.GridDiffusion.gui;
 
+import java.awt.Color;
 import xyz.koleno.GridDiffusion.app.Behaviors;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.prefs.Preferences;
-import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +26,7 @@ import javax.swing.border.EmptyBorder;
 public class MainWindow extends JFrame {
     
     private final JPanel mainPanel;
+    private JPanel options;
     private JTextField[] optBeh;
     private JButton startButton;
     private JButton stepButton;
@@ -48,18 +53,27 @@ public class MainWindow extends JFrame {
     }
     
     private void init() {
-	this.mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-	mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
-	
 	this.initMenu();
-	
+        
+        this.mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+	mainPanel.setLayout(new GridBagLayout());
+        
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.fill = GridBagConstraints.BOTH;
+        cons.weightx = 0.9;
+        cons.gridx = 0;
+        cons.weighty= 1;	
+        	
 	grid = new Grid();
 	grid.setCols(this.prefs.getInt("rows", 10));
 	grid.setRows(this.prefs.getInt("cols", 10));
-	mainPanel.add(grid);	
+	mainPanel.add(grid, cons);	
 	
 	this.initOptions();
-	
+        cons.gridx = 1;
+        cons.weightx = 0.1;
+	mainPanel.add(options, cons);
+        
 	this.add(mainPanel);
     }
     
@@ -68,62 +82,65 @@ public class MainWindow extends JFrame {
     }
     
     private void initOptions() {
-	
-	JPanel options = new JPanel();
-	options.setMaximumSize(new Dimension(120, this.getSize().height));	
-	options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
-		
+	options = new JPanel();
+        options.setBorder(new EmptyBorder(0, 5, 0, 0));	
+        options.setLayout(new GridBagLayout());
+        
+        // components are organized in one column with even width and height
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.fill = GridBagConstraints.BOTH;
+        cons.weightx = 1;
+        cons.gridx = 0;
+        cons.weighty= 1;
+        cons.insets = new Insets(0, 0, 5, 0); // bottom margin for the components
+        
 	Behaviors beh = Behaviors.getInstance();
 	this.optBeh = new JTextField[beh.getBehaviors().length];
 	for(int i = 0; i < beh.getBehaviors().length; i++) {
 	    JLabel labBeh = new JLabel("Behavior " + beh.getBehaviors()[i] + ": ");
+            labBeh.setVerticalAlignment(JLabel.BOTTOM);
 	    labBeh.setForeground(beh.getColor(i));
-	    options.add(labBeh);
+	    options.add(labBeh, cons);
 	    optBeh[i] = new JTextField("" + beh.getPayoff(i));
-	    options.add(optBeh[i]);
+	    options.add(optBeh[i], cons);
 	}	
 	
         // buttons
-	startButton = new JButton("Start diffusion");
+	startButton = new JButton("Start Diffusion");
 	startButton.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		startButtonSubmitted();
 	    }
 	});
-	options.add(startButton);
+	options.add(startButton, cons);
 	
-	stepButton = new JButton("One step");
+	stepButton = new JButton("Take One Step");
 	stepButton.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		stepButtonSubmitted();
 	    }
 	});
-	options.add(stepButton);
+	options.add(stepButton, cons);
 	
-	backButton = new JButton("Back (one step)");
+	backButton = new JButton("Back One Step");
 	backButton.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		backButtonSubmitted();
 	    }
 	});
-	options.add(backButton);
+	options.add(backButton, cons);
 	
-	mainPanel.add(options);
-
-	backInitButton = new JButton("Back (start position)");
+	backInitButton = new JButton("Back to Start");
 	backInitButton.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		backInitButtonSubmitted();
 	    }
 	});
-	options.add(backInitButton);
-	
-	mainPanel.add(options);	
-		
+	options.add(backInitButton, cons);
     }
     
     private void stepButtonSubmitted() {
