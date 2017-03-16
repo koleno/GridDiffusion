@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  * Grid rendering class

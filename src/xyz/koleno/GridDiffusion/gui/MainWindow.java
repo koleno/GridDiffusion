@@ -1,6 +1,5 @@
 package xyz.koleno.GridDiffusion.gui;
 
-import java.awt.Color;
 import xyz.koleno.GridDiffusion.app.Behaviors;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -11,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.prefs.Preferences;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
